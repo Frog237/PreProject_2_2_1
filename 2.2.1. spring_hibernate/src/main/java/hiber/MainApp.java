@@ -4,7 +4,6 @@ import hiber.config.AppConfig;
 import hiber.model.Car;
 import hiber.model.User;
 import hiber.service.UserService;
-import hiber.service.UserServiceImp;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
@@ -36,11 +35,15 @@ public class MainApp {
       }
 
       List<User> foundUsers = userService.findUserByCar("Camry", 25);
+      int i = 1;
       for (User user : foundUsers) {
-         System.out.println(user.getCar().getModel() + " " + user.getCar().getSeries() + " owner(s):");
-         System.out.println("First Name: " + user.getFirstName());
-         System.out.println("Last Name: " + user.getLastName());
-         System.out.println("Email: " + user.getEmail());
+         if (i++ == 1) {
+            System.out.println(user.getCar().getModel() + " "
+                    + user.getCar().getSeries() + " owner(s):\n");
+         }
+         System.out.println(i-1 + ") First Name: " + user.getFirstName());
+         System.out.println("   Last Name: " + user.getLastName());
+         System.out.println("   Email: " + user.getEmail() + "\n");
       }
 
       context.close();
